@@ -22,6 +22,14 @@ export class CadastroDeAlunos {
      if (result) result.copyFrom(aluno);
      return result;
    }
+   remover (cpf: string): boolean{
+    var temp = this.alunos.length;
+    this.alunos = this.alunos.filter (a => a.cpf != cpf);
+    if (temp != this.alunos.length){
+      return true;
+    }
+    return false;
+  }
 
     getAlunos(): Aluno[] {
      return this.alunos;

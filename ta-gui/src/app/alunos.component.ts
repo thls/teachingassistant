@@ -28,6 +28,11 @@ import { AlunoService } from './aluno.service';
                 },
                 msg => { alert(msg.message); }
               );
+    }
+    removerAluno(a: Aluno): void{
+      this.alunoService.remover(a.cpf).subscribe(bool => {
+        if (bool) {this.ngOnInit();}
+      });
     } 
 
     onMove(): void {
