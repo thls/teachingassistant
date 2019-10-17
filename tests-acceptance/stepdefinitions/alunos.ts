@@ -1,5 +1,7 @@
 import { defineSupportCode } from 'cucumber';
 import { browser, $, element, ElementArrayFinder, by } from 'protractor';
+import { async } from 'q';
+import { cpus } from 'os';
 let chai = require('chai').use(require('chai-as-promised'));
 let expect = chai.expect;
 
@@ -12,6 +14,10 @@ async function criarAluno(name, cpf) {
     await $("input[name='namebox']").sendKeys(<string> name);
     await $("input[name='cpfbox']").sendKeys(<string> cpf);
     await element(by.buttonText('Adicionar')).click();
+}
+
+async function removerAluno(cpf){
+    await element(by.id(cpf)).click();
 }
 
 async function assertTamanhoEqual(set,n) {
@@ -61,5 +67,9 @@ defineSupportCode(function ({ Given, When, Then }) {
     Then(/^I can see an error message$/, async () => {
         var allmsgs : ElementArrayFinder = element.all(by.name('msgcpfexistente'));
         await assertTamanhoEqual(allmsgs,1);
+    });
+
+    When(/^I try to delete a student with CPF "(\d*)"$/, async(cpf) => {
+        await removerAluno(cpf);
     });
 })
