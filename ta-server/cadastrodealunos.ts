@@ -5,7 +5,7 @@ export class CadastroDeAlunos {
 
     cadastrar(aluno: Aluno): Aluno {
      var result = null;
-     if (this.cpfNaoCadastrado(aluno.cpf)) {
+     if (this.cpfNaoCadastrado(aluno.cpf) && this.loginNaoCadastrado(aluno.loginGit)) {
        result = new Aluno();
        result.copyFrom(aluno);
        this.alunos.push(result);
@@ -15,6 +15,18 @@ export class CadastroDeAlunos {
 
     cpfNaoCadastrado(cpf: string): boolean {
       return !this.alunos.find(a => a.cpf == cpf);
+   }
+   loginNaoCadastrado(login: string): boolean {
+     return !this.alunos.find(a => a.loginGit == login);
+   }
+
+   remover (cpf: string): boolean{
+     var temp = this.alunos.length;
+     this.alunos = this.alunos.filter (a => a.cpf != cpf);
+     if (temp != this.alunos.length){
+       return true;
+     }
+     return false;
    }
 
     atualizar(aluno: Aluno): Aluno {
