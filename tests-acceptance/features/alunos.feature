@@ -19,4 +19,4 @@ Scenario: Deleting student with registered CPF
 Given I am at the students page
 Given I can see a student with CPF "685" in the students list
 When I try to delete a student with CPF "685"
-Then I cannot see "Fulano" with CPF "685" in the students list
+Then I cannot see a student with CPF "685" in the students list
